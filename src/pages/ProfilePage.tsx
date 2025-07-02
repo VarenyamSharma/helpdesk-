@@ -14,6 +14,12 @@ import { User, Mail, Calendar, Shield } from 'lucide-react';
 export const ProfilePage = () => {
   const { user } = useAuth();
 
+  const formatDate = (date: Date | string | undefined) => {
+    if (!date) return 'N/A';
+    if (typeof date === 'string') return date;
+    return date.toLocaleDateString();
+  };
+
   return (
     <>
       <Helmet>
@@ -44,7 +50,7 @@ export const ProfilePage = () => {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                Joined {user?.createdAt?.toLocaleDateString()}
+                Joined {formatDate(user?.createdAt)}
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Shield className="h-4 w-4" />
