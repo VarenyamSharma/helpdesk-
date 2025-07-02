@@ -23,13 +23,14 @@ import {
   BarChart3,
   HelpCircle,
   User,
-  LogOut
+  LogOut,
+  Wrench
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const getNavigationItems = (role: string) => {
   const baseItems = [
-    { title: 'Dashboard', url: '/', icon: Home },
+    { title: 'Dashboard', url: getDashboardUrl(role), icon: Home },
     { title: 'My Tickets', url: '/tickets', icon: Ticket },
   ];
 
@@ -41,17 +42,32 @@ const getNavigationItems = (role: string) => {
       { title: 'System Settings', url: '/admin/settings', icon: Settings },
     ],
     technical: [
-      { title: 'Assigned Tickets', url: '/support/tickets', icon: Ticket },
-      { title: 'Knowledge Base', url: '/support/kb', icon: HelpCircle },
+      { title: 'Assigned Tickets', url: '/technical/tickets', icon: Ticket },
+      { title: 'Knowledge Base', url: '/technical/kb', icon: HelpCircle },
+      { title: 'Tools', url: '/technical/tools', icon: Wrench },
     ],
     operations: [
-      { title: 'Queue Management', url: '/ops/queue', icon: BarChart3 },
-      { title: 'Escalations', url: '/ops/escalations', icon: Ticket },
+      { title: 'Queue Management', url: '/operations/queue', icon: BarChart3 },
+      { title: 'Escalations', url: '/operations/escalations', icon: Ticket },
+      { title: 'Reports', url: '/operations/reports', icon: BarChart3 },
     ],
     user: []
   };
 
   return [...baseItems, ...roleSpecificItems[role as keyof typeof roleSpecificItems]];
+};
+
+const getDashboardUrl = (role: string): string => {
+  switch (role) {
+    case 'admin':
+      return '/admin/dashboard';
+    case 'technical':
+      return '/technical/dashboard';
+    case 'operations':
+      return '/operations/dashboard';
+    default:
+      return '/dashboard';
+  }
 };
 
 export const AppSidebar = () => {

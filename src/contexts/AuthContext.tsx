@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { User, AuthState, UserRole } from '@/types/auth';
 
 interface AuthContextType extends AuthState {
@@ -45,7 +46,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: '1',
       email,
       name: email.split('@')[0],
-      role: email.includes('admin') ? 'admin' : 'user',
+      role: email.includes('admin') ? 'admin' : 
+            email.includes('tech') ? 'technical' :
+            email.includes('ops') ? 'operations' : 'user',
       createdAt: new Date(),
     };
 
@@ -55,6 +58,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isAuthenticated: true,
       isLoading: false,
     });
+
+    // Redirect based on role
+    const dashboardPath = getDashboardPath(mockUser.role);
+    window.location.href = dashboardPath;
   };
 
   const signup = async (email: string, password: string, name: string, role: UserRole) => {
@@ -73,6 +80,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isAuthenticated: true,
       isLoading: false,
     });
+
+    // Redirect based on role
+    const dashboardPath = getDashboardPath(role);
+    window.location.href = dashboardPath;
   };
 
   const logout = () => {
@@ -82,6 +93,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isAuthenticated: false,
       isLoading: false,
     });
+  };
+
+  const getDashboardPath = (role: UserRole): string => {
+    switch (role) {
+      case 'admin':
+        return '/admin/dashboard';
+      case 'technical':
+        return '/technical/dashboard';
+      case 'operations':
+        return '/operations/dashboard';
+      default:
+        return '/dashboard';
+    }
   };
 
   return (
