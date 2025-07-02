@@ -1,15 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { MetricCard } from '@/components/dashboard/MetricCard';
 import { TicketChart } from '@/components/dashboard/TicketChart';
 import { RecentTickets } from '@/components/dashboard/RecentTickets';
+import { CreateTicketForm } from '@/components/ticket/CreateTicketForm';
 import { Ticket, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 export const UserDashboard = () => {
   const { user } = useAuth();
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   const metrics = [
     {
@@ -53,9 +56,16 @@ export const UserDashboard = () => {
             Here's an overview of your support tickets.
           </p>
         </div>
-        <Button className="bg-capri hover:bg-capri/90 text-white">
-          Create New Ticket
-        </Button>
+        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-capri hover:bg-capri/90 text-white">
+              Create New Ticket
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+            <CreateTicketForm />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -70,17 +80,25 @@ export const UserDashboard = () => {
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <Button className="w-full justify-start bg-capri hover:bg-capri/90 text-white">
-              <Ticket className="mr-2 h-4 w-4" />
-              Submit New Request
+            <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full justify-start bg-capri hover:bg-capri/90 text-white">
+                  <Ticket className="mr-2 h-4 w-4" />
+                  Submit New Request
+                </Button>
+              </DialogTrigger>
+            </Dialog>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="/tickets">
+                <CheckCircle className="mr-2 h-4 w-4" />
+                View My Tickets
+              </a>
             </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <CheckCircle className="mr-2 h-4 w-4" />
-              View My Tickets
-            </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <Clock className="mr-2 h-4 w-4" />
-              Check Status
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="/tickets">
+                <Clock className="mr-2 h-4 w-4" />
+                Check Status
+              </a>
             </Button>
           </CardContent>
         </Card>

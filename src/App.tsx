@@ -12,6 +12,9 @@ import { UserDashboard } from "@/pages/UserDashboard";
 import { AdminDashboard } from "@/pages/AdminDashboard";
 import { TechnicalDashboard } from "@/pages/TechnicalDashboard";
 import { OperationsDashboard } from "@/pages/OperationsDashboard";
+import { TicketsPage } from "@/pages/TicketsPage";
+import { ProfilePage } from "@/pages/ProfilePage";
+import { SettingsPage } from "@/pages/SettingsPage";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -63,6 +66,36 @@ const App = () => (
                 <ProtectedRoute>
                   <AppLayout>
                     <OperationsDashboard />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/tickets"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <TicketsPage />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <ProfilePage />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <SettingsPage />
                   </AppLayout>
                 </ProtectedRoute>
               }

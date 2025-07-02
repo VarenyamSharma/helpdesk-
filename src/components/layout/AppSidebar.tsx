@@ -24,7 +24,8 @@ import {
   HelpCircle,
   User,
   LogOut,
-  Wrench
+  Wrench,
+  UserCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -32,6 +33,7 @@ const getNavigationItems = (role: string) => {
   const baseItems = [
     { title: 'Dashboard', url: getDashboardUrl(role), icon: Home },
     { title: 'My Tickets', url: '/tickets', icon: Ticket },
+    { title: 'Profile', url: '/profile', icon: UserCircle },
   ];
 
   const roleSpecificItems = {
@@ -39,19 +41,23 @@ const getNavigationItems = (role: string) => {
       { title: 'All Tickets', url: '/admin/tickets', icon: Ticket },
       { title: 'Users', url: '/admin/users', icon: Users },
       { title: 'Analytics', url: '/admin/analytics', icon: BarChart3 },
-      { title: 'System Settings', url: '/admin/settings', icon: Settings },
+      { title: 'Settings', url: '/settings', icon: Settings },
     ],
     technical: [
       { title: 'Assigned Tickets', url: '/technical/tickets', icon: Ticket },
       { title: 'Knowledge Base', url: '/technical/kb', icon: HelpCircle },
       { title: 'Tools', url: '/technical/tools', icon: Wrench },
+      { title: 'Settings', url: '/settings', icon: Settings },
     ],
     operations: [
       { title: 'Queue Management', url: '/operations/queue', icon: BarChart3 },
       { title: 'Escalations', url: '/operations/escalations', icon: Ticket },
       { title: 'Reports', url: '/operations/reports', icon: BarChart3 },
+      { title: 'Settings', url: '/settings', icon: Settings },
     ],
-    user: []
+    user: [
+      { title: 'Settings', url: '/settings', icon: Settings },
+    ]
   };
 
   return [...baseItems, ...roleSpecificItems[role as keyof typeof roleSpecificItems]];
