@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom Helpdesk Color Palette
+				'salmon-pink': '#F49097',
+				'mauve': '#DFB2F4',
+				'corn': '#F5E960',
+				'ghost-white': '#F2F5FF',
+				'turquoise': '#55D6C2',
+				'violet-crayola': '#963484',
+				'true-blue': '#3066BE',
+				'french-sky-blue': '#60AFFF',
+				'capri': '#28C2FF',
+				'electric-blue': '#2AF5FF'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
