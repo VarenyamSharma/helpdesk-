@@ -37,7 +37,7 @@ export const CreateTicketForm = () => {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle className="text-violet-crayola">Create New Ticket</CardTitle>
       </CardHeader>
