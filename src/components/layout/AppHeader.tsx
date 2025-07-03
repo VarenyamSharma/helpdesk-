@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 
 export const AppHeader = () => {
   return (
-    <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-gray-900/95 dark:supports-[backdrop-filter]:bg-gray-900/60">
+    <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="flex h-14 items-center gap-4 px-4">
         <SidebarTrigger />
         
@@ -16,7 +16,7 @@ export const AppHeader = () => {
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search tickets..."
-              className="pl-8 bg-ghost-white/50 focus:bg-white dark:bg-gray-800/50 dark:focus:bg-gray-800"
+              className="pl-8 bg-ghost-white/50 focus:bg-white"
             />
           </div>
         </div>

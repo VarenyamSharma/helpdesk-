@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,12 +12,7 @@ import { Settings, Bell, Shield, Users, Database } from 'lucide-react';
 
 export const SettingsPage = () => {
   const { user } = useAuth();
-  const { theme, setTheme } = useTheme();
   const isAdmin = user?.role === 'admin';
-
-  const handleDarkModeToggle = (checked: boolean) => {
-    setTheme(checked ? 'dark' : 'light');
-  };
 
   return (
     <>
@@ -67,14 +60,6 @@ export const SettingsPage = () => {
                       <SelectItem value="cst">CST</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="dark-mode">Dark Mode</Label>
-                  <Switch 
-                    id="dark-mode" 
-                    checked={theme === 'dark'}
-                    onCheckedChange={handleDarkModeToggle}
-                  />
                 </div>
                 <Button className="bg-capri hover:bg-capri/90 text-white">
                   Save Changes
